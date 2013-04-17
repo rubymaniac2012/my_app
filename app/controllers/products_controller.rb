@@ -8,11 +8,6 @@ class ProductsController < ApplicationController
     @products=Product.find(:all)
    end
 
-   def list
-    @products=Product.find(:all)
-   end
-
-
    def new 
     @product=Product.new
    end
