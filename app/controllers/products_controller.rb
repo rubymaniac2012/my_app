@@ -1,7 +1,9 @@
 class ProductsController < ApplicationController
 
   before_filter :self_load, :only=>[:show,:edit,:update,:destroy]
-   
+
+  before_filter :authenticate_user, :only=>[:edit,:update,:destroy]
+
    def index
     @products=Product.find(:all)
    end
@@ -51,5 +53,11 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def authenticate_user
+    if current_user
+    else
+       redirect_to root_url, :notice=>'You are not authorised to access'
+    end
+  end
 
 end
